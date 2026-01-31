@@ -88,3 +88,17 @@ button:focus {
 .equal-btn:hover{
     background-color: rgb(78, 238, 81);
 }
+
+/*shake animation*/
+@keyframes shake {
+    0% { transform: translateX(0); }
+    20% { transform: translateX(-5px); }
+    40% { transform: translateX(5px); }
+    60% { transform: translateX(-5px); }
+    80% { transform: translateX(5px); }
+    100% { transform: translateX(0); }
+}
+
+#display.shake {
+    animation: shake 0.4s;
+}

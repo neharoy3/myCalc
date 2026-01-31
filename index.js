@@ -66,6 +66,14 @@ function calculate(){
     }
     catch{
         display.value = "INVALID FORMAT";
+        //shake animation
+        display.classList.add("shake");
+        //remove after animation
+        setTimeout(()=>{
+            display.classList.remove("shake");
+        },400);
+
+        //silent clear
         setTimeout(() => {
             clearDisplay(false);
         }, 2000);
