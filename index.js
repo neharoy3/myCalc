@@ -1,6 +1,21 @@
 const display = document.getElementById("display");
 
 function appendToDisplay(input){
+
+    const value  = display.value;
+    const lastChar = value.slice(-1);
+    const operators = "+−×÷";
+
+    //prevent starting w/ operator
+    if(operators.includes(input) && value===""){
+        if(input!=="−") return;
+    }
+
+    //block extra operators
+    if(operators.includes(input) && operators.includes(lastChar)){
+        return;
+    }
+
     //block extra decimals
     if(input=="."){
         const value = display.value;
