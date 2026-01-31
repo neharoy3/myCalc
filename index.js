@@ -1,6 +1,12 @@
+//click sound effect!
+const clicksound = new Audio("click.mp3");
+clicksound.volume=0.4;
+
 const display = document.getElementById("display");
 
 function appendToDisplay(input){
+    clicksound.currentTime=0;
+    clicksound.play();
 
     const value  = display.value;
     const lastChar = value.slice(-1);
@@ -28,11 +34,18 @@ function appendToDisplay(input){
     display.value += input;
 }
 
-function clearDisplay(){
+function clearDisplay(playsound=true){
+    if(playsound){
+        clicksound.currentTime=0;
+        clicksound.play();
+    }
+    
     display.value = "";
 }
 
 function calculate(){
+    clicksound.currentTime=0;
+    clicksound.play();
     try{
         let expression = display.value;
 
@@ -54,7 +67,7 @@ function calculate(){
     catch{
         display.value = "INVALID FORMAT";
         setTimeout(() => {
-            clearDisplay();
+            clearDisplay(false);
         }, 2000);
     }
 }
@@ -83,12 +96,15 @@ bracketBtn.addEventListener("click", () => {
 const backspaceBtn = document.getElementById("backspaceBtn");
 
 backspaceBtn.addEventListener("click", () => {
+    clicksound.currentTime=0;
+    clicksound.play();
     display.value = display.value.slice(0, -1);
 });
 
 //keyboard keys input
 document.addEventListener("keydown", (event) => {
-
+    clicksound.currentTime=0;
+    clicksound.play();
     const key = event.key;
 
     if (!isNaN(key) || key === ".") {
