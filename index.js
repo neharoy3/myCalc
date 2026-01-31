@@ -93,4 +93,11 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
+//input animation
+document.addEventListener("keydown", () => {
+    display.classList.add("active");
+    setTimeout(() => display.classList.remove("active"), 100);
+});
+
+
 

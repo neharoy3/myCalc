@@ -28,6 +28,10 @@ body{
     color: white;
     background-color: rgba(59, 56, 56, 0.895);
 }
+#display.active {
+    box-shadow: 0 0 10px lime;
+}
+
 
 #keys{
     display: grid;
