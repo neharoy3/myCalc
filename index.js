@@ -32,3 +32,26 @@ function calculate(){
         }, 2000);
     }
 }
+
+const bracketBtn = document.getElementById("bracketBtn");
+
+bracketBtn.addEventListener("click", () => {
+    const value = display.value;
+    const lastChar = value.slice(-1);
+
+    // Count open and close brackets
+    const openBrackets = (value.match(/\(/g) || []).length;
+    const closeBrackets = (value.match(/\)/g) || []).length;
+
+    // Decide whether to open or close
+    if (
+        value === "" ||
+        "+-*/(".includes(lastChar) ||
+        openBrackets === closeBrackets
+    ) {
+        appendToDisplay("(");
+    } else {
+        appendToDisplay(")");
+    }
+});
+
