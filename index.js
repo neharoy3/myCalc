@@ -24,6 +24,8 @@ function calculate(){
         expression = expression.replace(/×/g, "*");
         expression = expression.replace(/÷/g, "/");
         expression = expression.replace(/−/g, "-");
+        //% is percentage 
+        expression = expression.replace(/(\d+\.?\d*)%/g, "($1/100)");
 
         let result = eval(expression);
 
