@@ -33,6 +33,7 @@ function calculate(){
     }
 }
 
+//brackets button
 const bracketBtn = document.getElementById("bracketBtn");
 
 bracketBtn.addEventListener("click", () => {

@@ -10,26 +10,24 @@ body{
 #calculator{
     background-color: rgb(0, 0, 0);
     border-radius: 15px;
-    max-width: 500px;
+    max-width:  min(90vw, 450px);
     overflow: hidden;
     padding: 20px;
 }
 
 #display{
     font-family: 'Roboto Mono', monospace;
-    width: 90%;
+    width: 100%;
+    box-sizing: border-box;
     border-radius: 15px;
     padding: 20px;
-    font-size: 3.5rem;
+    font-size: clamp(3rem, 4vw, 3.5rem);
     white-space: nowrap;
     overflow: hidden;
-    text-align: left;
+    text-align: right;
     border: none;
     color: white;
     background-color: rgba(59, 56, 56, 0.895);
-}
-#display.active {
-    box-shadow: 0 0 10px lime;
 }
 
 
@@ -42,8 +40,8 @@ body{
 
 button{
     width: 100px;
+    aspect-ratio: 1;
     font-family: 'Roboto Mono', monospace;
-    height: 100px;
     border-radius: 50px;
     border: none;
     background-color: rgba(59, 56, 56, 0.895);
@@ -58,6 +56,9 @@ button:hover{
 }
 button:active{
     background-color: rgb(181, 178, 178);
+}
+button:focus {
+    outline: 2px solid  rgb(5, 177, 8);
 }
 
 .operator-btn{
