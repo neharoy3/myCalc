@@ -35,11 +35,17 @@ body{
     display: grid;
     grid-template-columns: repeat(4,1fr);
     gap: 10px;
-    padding: 25px;
+    padding: 15px;
+    justify-items: center;
+}
+.key-press {
+    background-color: rgb(181, 178, 178) !important;
+    transform: scale(0.95);
 }
 
+
 button{
-    width: 100px;
+    width: 100%;
     aspect-ratio: 1;
     font-family: 'Roboto Mono', monospace;
     border-radius: 50px;

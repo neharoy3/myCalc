@@ -1,6 +1,15 @@
 const display = document.getElementById("display");
 
 function appendToDisplay(input){
+    //block extra decimals
+    if(input=="."){
+        const value = display.value;
+        const parts = value.split(/[+\-×÷]/);
+        const lastNum = parts[parts.length-1];
+        if(lastNum.includes(".")){
+            return;
+        }
+    }
     display.value += input;
 }
 
@@ -54,13 +63,13 @@ bracketBtn.addEventListener("click", () => {
     }
 });
 
-//keyboard keys input
 const backspaceBtn = document.getElementById("backspaceBtn");
 
 backspaceBtn.addEventListener("click", () => {
     display.value = display.value.slice(0, -1);
 });
 
+//keyboard keys input
 document.addEventListener("keydown", (event) => {
 
     const key = event.key;
@@ -97,6 +106,32 @@ document.addEventListener("keydown", (event) => {
 document.addEventListener("keydown", () => {
     display.classList.add("active");
     setTimeout(() => display.classList.remove("active"), 100);
+});
+document.addEventListener("keydown", (event) => {
+
+    let key = event.key;
+
+    // Map keyboard keys to button text
+    if (key === "*") key = "×";
+    if (key === "/") key = "÷";
+    if (key === "-") key = "−";
+    if (key === "Enter") key = "=";
+    if (key === "Backspace") key = "⌫";
+    if (key === "Escape") key = "C";
+    if (key === "(") key = "()";
+    if (key === ")") key = "()";
+
+    const buttons = document.querySelectorAll("button");
+
+    buttons.forEach(btn => {
+        if (btn.innerText === key) {
+            btn.classList.add("key-press");
+
+            setTimeout(() => {
+                btn.classList.remove("key-press");
+            }, 120);
+        }
+    });
 });
 
 
