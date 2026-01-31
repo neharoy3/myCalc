@@ -26,7 +26,7 @@ function calculate(){
         display.value = result;
     }
     catch{
-        display.value = "INVALID INPUT";
+        display.value = "INVALID FORMAT";
         setTimeout(() => {
             clearDisplay();
         }, 2000);
@@ -39,11 +39,9 @@ bracketBtn.addEventListener("click", () => {
     const value = display.value;
     const lastChar = value.slice(-1);
 
-    // Count open and close brackets
     const openBrackets = (value.match(/\(/g) || []).length;
     const closeBrackets = (value.match(/\)/g) || []).length;
 
-    // Decide whether to open or close
     if (
         value === "" ||
         "+-*/(".includes(lastChar) ||
@@ -54,4 +52,45 @@ bracketBtn.addEventListener("click", () => {
         appendToDisplay(")");
     }
 });
+
+//keyboard keys input
+const backspaceBtn = document.getElementById("backspaceBtn");
+
+backspaceBtn.addEventListener("click", () => {
+    display.value = display.value.slice(0, -1);
+});
+
+document.addEventListener("keydown", (event) => {
+
+    const key = event.key;
+
+    if (!isNaN(key) || key === ".") {
+        appendToDisplay(key);
+    }
+
+    if (key === "+") appendToDisplay("+");
+    if (key === "-") appendToDisplay("−");
+    if (key === "*") appendToDisplay("×");
+    if (key === "/") appendToDisplay("÷");
+    if (key === "%") appendToDisplay("%");
+
+    if (key === "Enter") {
+        event.preventDefault(); // stops form reload behavior
+        calculate();
+    }
+ 
+    if (key === "Backspace") {
+        display.value = display.value.slice(0, -1);
+        autoResizeText();
+    }
+
+    if (key === "Escape") {
+        clearDisplay();
+    }
+
+    if (key === "(" || key === ")") {
+        appendToDisplay(key);
+    }
+});
+
 
