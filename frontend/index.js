@@ -26,7 +26,7 @@ function saveHistory(expression, result){
     localStorage.setItem("calcHistory", JSON.stringify(historyData));
 
     // send to backend (cloud sync)
-    fetch("http://localhost:3000/save", {
+    fetch("https://mycalc-backend.onrender.com/history", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -295,7 +295,7 @@ document.addEventListener("click", (event) => {
 
 function loadCloudHistory(){
 
-    fetch("http://localhost:3000/history")
+    fetch("https://mycalc-backend.onrender.com/history")
     .then(res => res.json())
     .then(data => {
 
