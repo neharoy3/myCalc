@@ -7,14 +7,11 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-brightgreen?style=for-the-badge&logo=mongodb&logoColor=white)
 [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen?style=for-the-badge)](https://mycalc-neha.vercel.app/)
 
-A **beginner-level full stack mini project** built to practice real-world web development concepts including frontend UI, backend APIs, database integration, and cloud deployment.
-
-This project started as a simple calculator and was extended into a **cloud-connected app** with persistent history, theme switching, keyboard support, and modern UI behavior.
-
----
-
 ## 🌍 Live Deployment
 👉 https://mycalc-neha.vercel.app/
+
+---
+**myCalc** is a mini full-stack calculator built to practice real-world development concepts like frontend UI, backend APIs, cloud database integration, and deployment.
 
 ---
 
@@ -23,45 +20,30 @@ This project started as a simple calculator and was extended into a **cloud-conn
 - **Frontend:** HTML, CSS, JavaScript  
 - **Backend:** Node.js, Express  
 - **Database:** MongoDB Atlas  
-- **Hosting:** Vercel (Frontend), Render (Backend)
+- **Deployment:** Vercel (Frontend), Render (Backend)
 
 ---
 
-## 🚀 Features
+## ✨ Features
 
-### 📐 Calculator
-- Basic arithmetic (+ − × ÷)
-- Percentage support
-- Auto brackets
-- Decimal validation
-- Operator spam protection
-- Backspace support
-- Result rounding (4 decimals)
-- Invalid input detection + shake animation
-
-### ✨ UI & UX
-- Light / Dark theme toggle (saved using localStorage)
-- Responsive layout
-- Button animations & sound feedback
+- Basic calculator operations (+ − × ÷ %)
 - Keyboard input support
-- Visual key press highlighting
-
-### ☁️ Cloud History System
-- Slide-in history panel
-- Stores last calculations in MongoDB
-- Persistent data across refresh
-- Click history to reuse result
+- Light / Dark theme toggle
+- Calculation history panel
+- Cloud synced history (MongoDB)
+- Device-based session history (no login required)
 - Clear history option
+- Responsive UI (mobile friendly)
+- Button sounds and animations
 
 ---
 
-## 🎯 Purpose of Project
+## 🎯 Purpose
 
-This project was created to:
+- Practice frontend ↔ backend communication  
+- Learn REST APIs  
+- Work with MongoDB cloud database  
+- Understand real deployment workflow  
+- Improve full-stack fundamentals  
 
-- Practice **full stack development basics**
-- Learn **API integration**
-- Work with **MongoDB Atlas**
-- Understand **environment variables**
-- Deploy real applications on cloud platforms
-- Build production-style project structure
+---
