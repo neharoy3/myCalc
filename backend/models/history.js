@@ -1,18 +1,17 @@
 const mongoose = require("mongoose");
 
 const historySchema = new mongoose.Schema({
-    expression: {
+    sessionId: {
         type: String,
         required: true
     },
-    result: {
-        type: String,
-        required: true
-    },
+    expression: String,
+    result: String,
     createdAt: {
         type: Date,
         default: Date.now
     }
 });
+
 
 module.exports = mongoose.model("History", historySchema);

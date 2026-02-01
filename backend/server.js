@@ -15,14 +15,19 @@ app.use(express.json());
 //save calc
 app.post("/save", async (req, res) => {
 
-    const { expression, result } = req.body;
+    const { sessionId, expression, result } = req.body;
 
-    if (!expression || !result) {
+    if (!sessionId || !expression || !result) {
         return res.status(400).send("Invalid data");
     }
 
     try {
-        const entry = new History({ expression, result });
+        const entry = new History({
+            sessionId,
+            expression,
+            result
+        });
+
         await entry.save();
 
         res.send("Saved to DB");
@@ -33,12 +38,15 @@ app.post("/save", async (req, res) => {
 });
 
 
+
 //get history
-app.get("/history", async (req, res) => {
+app.get("/history/:sessionId", async (req, res) => {
 
     try {
+        const { sessionId } = req.params;
+
         const history = await History
-            .find()
+            .find({ sessionId })
             .sort({ createdAt: -1 })
             .limit(20);
 
@@ -48,6 +56,7 @@ app.get("/history", async (req, res) => {
         res.status(500).send("DB fetch error");
     }
 });
+
 
 
 const PORT = process.env.PORT || 3000;

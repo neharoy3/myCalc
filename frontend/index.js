@@ -1,3 +1,9 @@
+let sessionId = localStorage.getItem("calc_session");
+if(!sessionId){ //generate a unique id if not there
+    sessionId=crypto.randomUUID();
+    localStorage.setItem("calc_session",sessionId);
+}
+
 //click sound effect!
 const clicksound = new Audio("./media/click.mp3");
 clicksound.volume=0.4;
@@ -26,7 +32,7 @@ function saveHistory(expression, result){
     localStorage.setItem("calcHistory", JSON.stringify(historyData));
 
     // send to backend (cloud sync)
-    fetch("https://mycalc-backend.onrender.com/history", {
+    fetch(`https://mycalc-backend.onrender.com/history/${sessionId}`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
@@ -295,7 +301,7 @@ document.addEventListener("click", (event) => {
 
 function loadCloudHistory(){
 
-    fetch("https://mycalc-backend.onrender.com/history")
+    fetch(`https://mycalc-backend.onrender.com/history/${sessionId}`)
     .then(res => res.json())
     .then(data => {
 
