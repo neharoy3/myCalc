@@ -12,49 +12,43 @@ app.use(express.json());
 //temp history storage
 // let history = [];
 
-//save calc
-app.post("/save", async (req, res) => {
+//history
+app.post("/history/:sessionId", async (req, res) => {
+  const { expression, result } = req.body;
+  const { sessionId } = req.params;
 
-    const { sessionId, expression, result } = req.body;
+  if (!expression || !result || !sessionId) {
+    return res.status(400).send("Invalid data");
+  }
 
-    if (!sessionId || !expression || !result) {
-        return res.status(400).send("Invalid data");
-    }
+  try {
+    const entry = new History({
+      sessionId,
+      expression,
+      result
+    });
 
-    try {
-        const entry = new History({
-            sessionId,
-            expression,
-            result
-        });
-
-        await entry.save();
-
-        res.send("Saved to DB");
-
-    } catch (err) {
-        res.status(500).send("DB save error");
-    }
+    await entry.save();
+    res.send("Saved to DB");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("DB save error");
+  }
 });
 
-
-
-//get history
 app.get("/history/:sessionId", async (req, res) => {
+  const { sessionId } = req.params;
 
-    try {
-        const { sessionId } = req.params;
+  try {
+    const history = await History.find({ sessionId })
+      .sort({ createdAt: -1 })
+      .limit(20);
 
-        const history = await History
-            .find({ sessionId })
-            .sort({ createdAt: -1 })
-            .limit(20);
-
-        res.json(history);
-
-    } catch (err) {
-        res.status(500).send("DB fetch error");
-    }
+    res.json(history);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("DB fetch error");
+  }
 });
 
 

@@ -1,3 +1,8 @@
+const API_BASE =
+  location.hostname === "localhost"
+    ? "http://localhost:3000"
+    : "https://mycalc-backend.onrender.com";
+
 let sessionId = localStorage.getItem("calc_session");
 if (!sessionId) {
   //generate a unique id if not there
@@ -41,7 +46,7 @@ function saveHistory(expression, result) {
   localStorage.setItem("calcHistory", JSON.stringify(historyData));
 
   // send to backend (cloud sync)
-  fetch(`https://mycalc-backend.onrender.com/history/${sessionId}`, {
+  fetch(`${API_BASE}/history/${sessionId}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -299,7 +304,7 @@ document.addEventListener("click", (event) => {
 });
 
 function loadCloudHistory() {
-  fetch(`https://mycalc-backend.onrender.com/history/${sessionId}`)
+  fetch(`${API_BASE}/history/${sessionId}`)
     .then((res) => res.json())
     .then((data) => {
       if (data.length > 0) {
