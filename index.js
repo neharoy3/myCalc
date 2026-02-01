@@ -1,5 +1,5 @@
 //click sound effect!
-const clicksound = new Audio("click.mp3");
+const clicksound = new Audio("./media/click.mp3");
 clicksound.volume=0.4;
 
 const historyToggle = document.getElementById("historyToggle");
