@@ -224,7 +224,7 @@ button:focus {
   right: calc(-1 * var(--history-panel-width));
   width: var(--history-panel-width);
   height: 100vh;
-  background: #413c3c;
+  background: rgb(70, 70, 70);
   color: white;
   padding: 15px;
   padding-top: 35px;

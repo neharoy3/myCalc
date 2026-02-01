@@ -51,6 +51,15 @@ app.get("/history/:sessionId", async (req, res) => {
   }
 });
 
+app.delete("/history/:sessionId", async (req, res) => {
+  try {
+    await History.deleteMany({ sessionId: req.params.sessionId });
+    res.send("History cleared");
+  } catch (err) {
+    res.status(500).send("Clear failed");
+  }
+});
+
 
 
 const PORT = process.env.PORT || 3000;

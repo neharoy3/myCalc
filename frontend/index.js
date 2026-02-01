@@ -60,6 +60,7 @@ function saveHistory(expression, result) {
   renderHistory();
 }
 
+
 function renderHistory() {
   historyList.innerHTML = "";
 
@@ -76,23 +77,30 @@ function renderHistory() {
 }
 
 //clear history
-const clearHistoryBtn = document.getElementById("clearHistoryBtn");
 clearHistoryBtn.addEventListener("click", () => {
   if (historyData.length === 0) return;
 
   const confirmClear = confirm("Clear all history?");
 
-  if (confirmClear) {
-    historyPanel.classList.add("clear-anim");
+  if (!confirmClear) return;
 
-    setTimeout(() => {
-      historyData = [];
-      localStorage.removeItem("calcHistory");
-      renderHistory();
-      historyPanel.classList.remove("clear-anim");
-    }, 200);
-  }
+  historyPanel.classList.add("clear-anim");
+
+  // Clear local
+  historyData = [];
+  localStorage.removeItem("calcHistory");
+  renderHistory();
+
+  // Clear cloud
+  fetch(`https://mycalc-backend.onrender.com/history/${sessionId}`, {
+    method: "DELETE",
+  }).catch(err => console.log("Cloud clear failed", err));
+
+  setTimeout(() => {
+    historyPanel.classList.remove("clear-anim");
+  }, 200);
 });
+
 
 function appendToDisplay(input) {
   clicksound.currentTime = 0;
