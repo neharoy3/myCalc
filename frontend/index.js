@@ -25,6 +25,18 @@ function saveHistory(expression, result){
 
     localStorage.setItem("calcHistory", JSON.stringify(historyData));
 
+    // send to backend (cloud sync)
+    fetch("http://localhost:3000/save", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            expression: expression,
+            result: result
+        })
+    }).catch(err => console.log("Cloud save failed:", err));
+
     renderHistory();
 }
 
@@ -281,4 +293,25 @@ document.addEventListener("click", (event) => {
     historyPanel.classList.remove("active");
 });
 
+function loadCloudHistory(){
+
+    fetch("http://localhost:3000/history")
+    .then(res => res.json())
+    .then(data => {
+
+        if(data.length > 0){
+            historyData = data.map(item => ({
+                exp: item.expression,
+                res: item.result
+            }));
+
+            renderHistory();
+        }
+
+    })
+    .catch(err => console.log("Cloud load failed:", err));
+}
+
+
 renderHistory();
+loadCloudHistory();
