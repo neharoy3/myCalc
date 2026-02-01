@@ -2,7 +2,71 @@
 const clicksound = new Audio("click.mp3");
 clicksound.volume=0.4;
 
+const historyToggle = document.getElementById("historyToggle");
+const historyPanel = document.getElementById("historyPanel");
+historyToggle.addEventListener("click", () => {
+    historyPanel.classList.toggle("active");
+});
+
 const display = document.getElementById("display");
+//create history storage
+let historyData = JSON.parse(localStorage.getItem("calcHistory")) || [];
+function saveHistory(expression, result){
+
+    historyData.unshift({
+        exp: expression,
+        res: result
+    });
+
+    // keep only last 20 entries
+    if(historyData.length > 20){
+        historyData.pop();
+    }
+
+    localStorage.setItem("calcHistory", JSON.stringify(historyData));
+
+    renderHistory();
+}
+
+function renderHistory(){
+
+    historyList.innerHTML = "";
+
+    historyData.forEach(item => {
+
+        const li = document.createElement("li");
+        li.textContent = `${item.exp} = ${item.res}`;
+
+        li.addEventListener("click", () => {
+            display.value = item.res;
+        });
+
+        historyList.appendChild(li);
+
+    });
+}
+
+//clear history
+const clearHistoryBtn = document.getElementById("clearHistoryBtn");
+clearHistoryBtn.addEventListener("click", () => {
+
+    if(historyData.length === 0) return;
+
+    const confirmClear = confirm("Clear all history?");
+
+    if(confirmClear){
+        historyPanel.classList.add("clear-anim");
+
+        setTimeout(() => {
+            historyData = [];
+            localStorage.removeItem("calcHistory");
+            renderHistory();
+            historyPanel.classList.remove("clear-anim");
+        }, 200);
+
+    }
+
+});
 
 function appendToDisplay(input){
     clicksound.currentTime=0;
@@ -63,6 +127,7 @@ function calculate(){
         }
 
         display.value = result;
+        saveHistory(expression,result);
     }
     catch{
         display.value = "INVALID FORMAT";
@@ -177,24 +242,43 @@ document.addEventListener("keydown", (event) => {
 
 //theme toggle
 const themeBtn = document.getElementById("themeToggle");
-
-// load saved theme
+const themeIcon = themeBtn.querySelector("img");
+// Load saved theme
 if (localStorage.getItem("theme") === "light") {
     document.body.classList.add("light-mode");
-    themeBtn.textContent = "☀️";
+    themeIcon.src = "sun.png";
 }
 
+// Toggle theme
 themeBtn.addEventListener("click", () => {
 
     document.body.classList.toggle("light-mode");
 
     if (document.body.classList.contains("light-mode")) {
         localStorage.setItem("theme", "light");
-        themeBtn.textContent = "☀️";
+        themeIcon.src = "sun.png";
     } else {
         localStorage.setItem("theme", "dark");
-        themeBtn.textContent = "🌙";
+        themeIcon.src = "moon.png";
     }
 });
 
+//history panel should close automatically
+document.addEventListener("click", (event) => {
 
+    //ignore if panel is not open
+    if (!historyPanel.classList.contains("active")) return;
+
+    //ignore if click inside history panel
+    if (
+        historyPanel.contains(event.target) ||
+        historyToggle.contains(event.target)
+    ) {
+        return;
+    }
+
+    //close panel
+    historyPanel.classList.remove("active");
+});
+
+renderHistory();

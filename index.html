@@ -5,12 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>myCalc</title>
     <link rel="stylesheet" href = "styles.css">
-    <link rel="icon" type="image/png" href="myCalc.png">
+    <link rel="icon" type="image/png" href="./media/myCalc.png">
 </head>
 <body>
 
     <div id = "calculator">
-        <button id="themeToggle">🌙</button>
+        <button id="themeToggle">
+            <img src="./media/moon.png" alt="theme">
+        </button>
+
+        <button id="historyToggle">
+            <img src="./media/history.png" alt="history">
+        </button>
+
         <input id = "display" readonly>
         <div id = "keys">
             <button onclick="clearDisplay()" class="operator-btn-clear">C</button>
@@ -36,6 +43,17 @@
         </div>
     </div>
     
+    <div id="historyPanel">
+        <h2>HISTORY</h2>
+
+    <button id="clearHistoryBtn">
+        <img src = "./media/clear.png" alr="clear history">
+    </button>
+
+    <ul id="historyList"></ul>
+    </div>
+
+
     <script src = "index.js"></script>
 
 </body>

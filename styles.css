@@ -1,7 +1,7 @@
 #themeToggle{
     position: fixed;
-    top: 12px;
-    right: 12px;
+    top: 50px;
+    left: max(20px, calc((100vw - 400px) / 2 - 150px));
     width: auto;
     height: auto;
     aspect-ratio: unset;
@@ -146,3 +146,93 @@ button:focus {
     animation: shake 0.4s;
 }
 
+#historyToggle{
+    position: fixed;
+    top: 120px;
+    left: max(20px, calc((100vw - 400px) / 2 - 150px));
+    width: auto;
+    height: auto;
+    aspect-ratio: unset;
+    padding: 6px;
+
+    font-size: 1.4rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    border-radius: 0;
+    z-index: 999;
+}
+
+
+#historyPanel {
+    position: fixed;
+    top: 0;
+    right: -260px;   /* hidden by default */
+    width: 250px;
+    height: 100vh;
+    background: #111;
+    color: white;
+    padding: 15px;
+    padding-top: 55px;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+    z-index: 998;
+}
+
+#historyPanel.active{
+    right: 0;
+}
+
+#historyPanel h2{
+    margin-top: 0;
+    text-align: center;
+    padding-right: 30px;
+}
+
+#historyList{
+    list-style: none;
+    padding: 0;
+}
+
+#historyList li{
+    padding: 8px;
+    border-bottom: 1px solid gray;
+    cursor: pointer;
+}
+
+#historyList li:hover{
+    background: #222;
+}
+#historyPanel {
+    font-family: 'Roboto Mono', monospace;
+}
+
+#themeToggle img,
+#historyToggle img {
+    width: 48px;
+    height: 48px;
+    pointer-events: none;
+}
+
+#clearHistoryBtn{
+    position: absolute;
+    top: 35px;
+    right: 30px;
+    width: auto;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+#clearHistoryBtn img{
+    width: 25px;
+    height: 25px;
+}
+.clear-anim {
+    animation: fadeOut 0.2s ease;
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0.3; }
+}
