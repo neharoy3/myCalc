@@ -212,7 +212,7 @@ button:focus {
 
 .history-header {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
   column-gap: 8px;
   margin-bottom: 12px;
@@ -246,16 +246,36 @@ button:focus {
   background: #222;
 }
 
+#closeHistoryBtn,
 #clearHistoryBtn {
-  grid-column: 3;
-  justify-self: start;
   padding: 4px;
   background: transparent;
   border: none;
   cursor: pointer;
   border-radius: 50%;
+  color: white;
+  font-size: 1.2rem;
+  line-height: 1;
+  width: 34px;
+  height: 34px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
+#closeHistoryBtn {
+  grid-column: 1;
+  justify-self: start;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+#clearHistoryBtn {
+  grid-column: 3;
+  justify-self: end;
+}
+
+#closeHistoryBtn:hover,
 #clearHistoryBtn:hover {
   background: rgba(255, 255, 255, 0.08);
 }
