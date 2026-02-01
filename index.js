@@ -246,7 +246,7 @@ const themeIcon = themeBtn.querySelector("img");
 // Load saved theme
 if (localStorage.getItem("theme") === "light") {
     document.body.classList.add("light-mode");
-    themeIcon.src = "sun.png";
+    themeIcon.src = "./media/sun.png";
 }
 
 // Toggle theme
@@ -256,10 +256,10 @@ themeBtn.addEventListener("click", () => {
 
     if (document.body.classList.contains("light-mode")) {
         localStorage.setItem("theme", "light");
-        themeIcon.src = "sun.png";
+        themeIcon.src = "./media/sun.png";
     } else {
         localStorage.setItem("theme", "dark");
-        themeIcon.src = "moon.png";
+        themeIcon.src = "./media/moon.png";
     }
 });
 
