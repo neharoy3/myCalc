@@ -53,9 +53,12 @@ body{
     position: relative;
     background-color: rgb(0, 0, 0);
     border-radius: 15px;
-    max-width:  min(90vw, 450px);
+    width: 100%;
+    max-width:  450px;
+    min-width: 280px;
+    max-height: 90vh;
     overflow: hidden;
-    padding: 20px;
+    padding: 16px;
 }
 
 #display{
@@ -63,8 +66,8 @@ body{
     width: 100%;
     box-sizing: border-box;
     border-radius: 15px;
-    padding: 20px;
-    font-size: clamp(3rem, 4vw, 3.5rem);
+    padding: 14px;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
     white-space: nowrap;
     overflow: hidden;
     text-align: right;
@@ -78,8 +81,8 @@ body{
     display: grid;
     grid-template-columns: repeat(4,1fr);
     gap: 10px;
-    padding: 15px;
-    justify-items: center;
+    padding: 12px;
+    max-height: 60vh;
 }
 .key-press {
     background-color: rgb(181, 178, 178) !important;
@@ -90,6 +93,7 @@ body{
 button{
     width: 100%;
     aspect-ratio: 1;
+    max-height: 64px;
     font-family: 'Roboto Mono', monospace;
     border-radius: 50px;
     border: none;
@@ -235,4 +239,49 @@ button:focus {
 @keyframes fadeOut {
     from { opacity: 1; }
     to { opacity: 0.3; }
+}
+
+/* responsive ui */
+@media (max-width: 700px) {
+    body{
+        align-items: flex-start;
+        padding-top: 40px;
+    }
+
+    #themeToggle {
+        top: 50px;
+        left: 30%;
+        transform: translateX(-120%); /* icons centered horizontally! */
+    }
+
+    #historyToggle {
+        top: 50px;
+        left: 30%;
+        transform: translateX(20%);
+    }
+
+
+    #themeToggle img,
+    #historyToggle img {
+        width: 36px;
+        height: 36px;
+    }
+
+    #calculator {
+        margin-top: 70px;
+    }
+
+    button{
+        font-size: 2rem;
+    }
+    #display{
+        font-size: clamp(1.8rem,5vw,2.8rem);
+        padding: 15px;
+    }
+
+    #keys{
+        gap: 8px;
+        padding: 8px;
+    }
+
 }
